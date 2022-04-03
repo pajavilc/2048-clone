@@ -1,9 +1,9 @@
+window.addEventListener("keydown", proccessKeyPress);
 
-
-window.addEventListener("keydown", proccessKeyPress)
-//window.addEventListener("keydown", (e) => { e.preventDefault() })
 window.onload = (() => {
-    document.getElementById("#link_howToPlay").addEventListener('click', highlight)
+    loadGame();
+    document.getElementById("#link_howToPlay").addEventListener('click', highlight);
+    document.getElementById('newGame').addEventListener('click', newGame);
 })
 
 function highlight(e) {
@@ -15,7 +15,3 @@ function highlight(e) {
     }, 2000)
 }
 
-function proccessKeyPress(e) {
-    e.preventDefault();
-
-}
