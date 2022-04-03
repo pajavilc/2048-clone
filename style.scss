@@ -1,0 +1,160 @@
+$border-roundness: 5px;
+$gridcell-spacing:12px;
+$line-height:32px;
+
+@mixin link {
+    text-decoration: underline;
+    font-weight: bold;
+    color: inherit;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: rgb(136, 123, 107);
+    scroll-behavior: smooth;
+
+}
+
+body {
+    background-color: rgb(255, 248, 239);
+    position: relative;
+    box-sizing: border-box;
+    width: 550px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+        p {
+            margin: 0;
+            padding: 0;
+            line-height: $line-height;
+        }
+
+        p:first-of-type {
+            font-size: 4em;
+            line-height: normal;
+        }
+
+        a {
+            @include link;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .stats {
+            div {
+                display: inline-block;
+                padding: 3px 30px;
+                border-radius: $border-roundness;
+                background-color: rgb(178, 164, 107);
+                font-size: 1.1em;
+                color: antiquewhite;
+
+                p {
+                    margin: 0;
+                    padding: 0;
+                    text-align: center;
+                    color: white;
+                    font-size: 1.2em;
+                }
+            }
+        }
+
+        #newGame {
+            align-self: flex-end;
+            border-radius: $border-roundness;
+            background-color: rgb(121, 95, 61);
+            width: fit-content;
+            padding: 12px 36px;
+
+            p {
+                padding: 0;
+                margin: 0;
+                color: white;
+            }
+        }
+    }
+}
+
+
+#game {
+    margin-top: 34px;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    #grid {
+        background-color: rgb(163, 149, 134);
+        border-radius: $border-roundness;
+        padding: 0 $gridcell-spacing;
+
+        .gridRow {
+            display: inline-block;
+
+            &:not(:last-of-type) {
+                margin-right: $gridcell-spacing;
+            }
+
+            .gridCell {
+                width: 100px;
+                height: 100px;
+                background-color: rgb(184, 172, 158);
+                border-radius: 3px;
+                margin: $gridcell-spacing 0 $gridcell-spacing 0;
+            }
+        }
+    }
+}
+
+footer {
+    p {
+        padding: 12px 6px;
+        margin: 5px 0 0 -12px;
+        line-height: $line-height;
+        border-radius: $border-roundness;
+
+        &:not(:last-of-type) {
+            border-bottom: 1px solid rgb(159, 159, 159);
+        }
+
+        a {
+            @include link;
+
+        }
+    }
+
+    #howToPlay {
+        &.animate {
+            animation: showTuto 2s;
+            animation-timing-function: cubic-bezier(1, 0, 0.61, 0.83);
+        }
+    }
+}
+
+.link {
+    @include link;
+}
+
+@keyframes showTuto {
+    0% {
+        background-color: rgb(174, 201, 50);
+    }
+
+    100% {
+        background-color: inherit;
+    }
+}

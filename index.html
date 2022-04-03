@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<header>
+    <div class="left">
+        <p>2048</p>
+        <p>Join the tiles, get to 2048</p>
+        <a id="#link_howToPlay" href="#howToPlay">How to play &#8594</a>
+    </div>
+    <div class="right">
+        <div class="stats">
+            <div id="score">
+                score
+                <p class="value">0</p>
+            </div>
+            <div id="best">
+                best
+                <p class="value">0</p>
+            </div>
+        </div>
+        <div id="newGame">
+            <p>New Game</p>
+        </div>
+    </div>
+</header>
+
+<body>
+    <div id="game">
+        <div id="grid">
+            <div class="gridRow">
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+            </div>
+            <div class="gridRow">
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+            </div>
+            <div class="gridRow">
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+            </div>
+            <div class="gridRow">
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+                <div class="gridCell"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <p id="howToPlay">
+        <strong>HOW TO PLAY:</strong> Use your <strong>arrow keys</strong> to move the tiles. Tiles with the same number
+        <strong>merge into one</strong> when they touch. Add them up to reach 2048
+        <br><a href="#game">Start playing &#8594</a>
+    </p>
+    <p>You are playing a copy of the original version of 2048.
+        <br><a href="https://play2048.co/">Play original &#8594</a>
+    </p>
+    <p>
+        Redone by <a href="github.com/pajavilc">Pajavilc</a>
+    </p>
+</footer>
+
+</html>
