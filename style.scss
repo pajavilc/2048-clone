@@ -1,6 +1,7 @@
-$border-roundness: 5px;
+$border-roundness: 4px;
 $gridcell-spacing:12px;
-$line-height:32px;
+$line-height:35px;
+$anim-time: 0.12s;
 
 @mixin link {
     text-decoration: underline;
@@ -8,9 +9,28 @@ $line-height:32px;
     color: inherit;
 }
 
+@mixin brownButton {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: $border-roundness;
+    background-color: rgb(121, 95, 61);
+    width: fit-content;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(143, 111, 70);
+    }
+
+    &:active {
+        background-color: rgb(168, 132, 85);
+    }
+}
+
 html {
     margin: 0;
-    padding: 0;
+    padding: 20px 0 0 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: rgb(136, 123, 107);
@@ -21,6 +41,8 @@ html {
 body {
     background-color: rgb(255, 248, 239);
     position: relative;
+    top: 0;
+    left: 0;
     box-sizing: border-box;
     width: 550px;
     left: 50%;
@@ -39,7 +61,8 @@ header {
         }
 
         p:first-of-type {
-            font-size: 4em;
+            font-size: 4rem;
+            font-weight: bold;
             line-height: normal;
         }
 
@@ -59,7 +82,7 @@ header {
                 padding: 3px 30px;
                 border-radius: $border-roundness;
                 background-color: rgb(178, 164, 107);
-                font-size: 1.1em;
+                font-size: 1.1rem;
                 color: antiquewhite;
 
                 p {
@@ -67,26 +90,35 @@ header {
                     padding: 0;
                     text-align: center;
                     color: white;
-                    font-size: 1.2em;
+                    font-size: 1.2rem;
+                }
+            }
+
+            #score {
+                position: relative;
+
+                .score_add {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    color: #000000;
+                    position: absolute;
+                    visibility: hidden;
+                    bottom: -10px;
+                    transition: bottom 1s ease-out, color 1s ease-out;
+
+                    &.show {
+                        visibility: visible;
+                        bottom: 30px;
+                        color: #7c7c7c6d;
+                    }
                 }
             }
         }
 
         #newGame {
+            @include brownButton;
             align-self: flex-end;
-            border-radius: $border-roundness;
-            background-color: rgb(121, 95, 61);
-            width: fit-content;
-            padding: 12px 36px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgb(143, 111, 70);
-            }
-
-            &:active {
-                background-color: rgb(168, 132, 85);
-            }
+            padding: 9px 30px;
 
             p {
                 padding: 0;
@@ -107,9 +139,12 @@ header {
     transform: translateX(-50%);
 
     #grid {
+        position: relative;
         background-color: rgb(163, 149, 134);
         border-radius: $border-roundness;
         padding: 0 $gridcell-spacing;
+        /*Needed -> space between gridRows*/
+        font-size: 0px;
 
         .gridRow {
             display: inline-block;
@@ -121,15 +156,63 @@ header {
             .gridCell {
                 width: 100px;
                 height: 100px;
-                background-color: rgb(184, 172, 158);
                 border-radius: 3px;
                 margin: $gridcell-spacing 0;
                 text-align: center;
                 vertical-align: middle;
                 line-height: 100px;
-                font-size: 3em;
+                font-size: 3rem;
+                background-color: rgb(184, 172, 158);
+
+                .content {
+                    z-index: 2000;
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgb(184, 172, 158);
+                }
             }
         }
+
+        #endPrompt {
+            position: absolute;
+            visibility: hidden;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: inherit;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.568);
+
+            p {
+                position: absolute;
+                top: calc(50% - 3rem - 25px);
+                left: 50%;
+                transform: translate(-50%);
+                margin: 0;
+                width: fit-content;
+                font-size: 3rem;
+                color: rgb(100, 100, 100);
+                font-weight: bold;
+            }
+
+            button {
+                @include brownButton;
+                position: absolute;
+                top: calc(50% + 25px);
+                padding: 9px 20px;
+                left: 50%;
+                transform: translate(-50%);
+            }
+
+            &.show {
+                visibility: visible;
+                animation: newTiles 0.25 ease-in;
+            }
+        }
+
     }
 }
 
@@ -140,13 +223,8 @@ footer {
         line-height: $line-height;
         border-radius: $border-roundness;
 
-        &:not(:last-of-type) {
-            border-bottom: 1px solid rgb(159, 159, 159);
-        }
-
         a {
             @include link;
-
         }
     }
 
@@ -162,6 +240,114 @@ footer {
     @include link;
 }
 
+//colors 
+#game #grid .gridRow .gridCell {
+
+    .content {
+        color: white;
+        font-size: 2.8rem;
+        font-weight: bold;
+        position: relative;
+        top: 0;
+        left: 0;
+
+        &.animate_new {
+            animation: newTile 0.25s ease-in;
+        }
+
+        &.animation_merge {
+            animation: merge 0.25s ease-in;
+        }
+
+    }
+
+
+
+    &.animate {
+        .content {
+            z-index: 3000;
+            bottom: -300px;
+            position: relative;
+            transition: top $anim-time ease, left $anim-time ease;
+        }
+    }
+
+    &.hide .content {
+        font-size: 3rem;
+        color: #0000;
+    }
+
+    &.cellVal_2 .content {
+        font-size: 3rem;
+        background-color: #B7B79E;
+        color: rgb(55, 55, 55);
+    }
+
+    &.cellVal_4 .content {
+        font-size: 3rem;
+        color: rgb(27, 27, 27);
+        background-color: #608567;
+    }
+
+    &.cellVal_8 .content {
+        font-size: 3rem;
+        color: rgb(0, 0, 0);
+        background-color: #38B000;
+    }
+
+    &.cellVal_16 .content {
+        font-size: 3rem;
+        background-color: #628219;
+    }
+
+    &.cellVal_32 .content {
+        font-size: 3rem;
+        background-color: #008000;
+    }
+
+    &.cellVal_64 .content {
+        font-size: 3rem;
+        background-color: #077b83;
+    }
+
+    &.cellVal_128 .content {
+        background-color: #3b3969;
+    }
+
+    &.cellVal_256 .content {
+        background-color: #2a3e5d;
+    }
+
+    &.cellVal_512 .content {
+        background-color: #3f295d;
+    }
+
+    &.cellVal_1024 .content {
+        background-color: #671d67;
+    }
+
+    &.cellVal_2048 .content {
+        background-color: #a20808;
+        box-shadow: #ff5e00 0px 0px 34px -8px;
+    }
+
+    &.cellVal_4096 .content {
+        background-color: #5a0101;
+    }
+
+    &.cellVal_8192 .content {
+        background-color: #100510;
+        ;
+    }
+
+
+}
+
+hr {
+    border-color: rgba(135, 135, 135, 0.55);
+    border-width: 1px;
+}
+
 @keyframes showTuto {
     0% {
         background-color: rgb(174, 201, 50);
@@ -169,5 +355,29 @@ footer {
 
     100% {
         background-color: inherit;
+    }
+}
+
+@keyframes newTile {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes merge {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

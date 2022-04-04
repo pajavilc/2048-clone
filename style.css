@@ -1,6 +1,6 @@
 html {
   margin: 0;
-  padding: 0;
+  padding: 20px 0 0 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   color: #887b6b;
@@ -10,6 +10,8 @@ html {
 body {
   background-color: #fff8ef;
   position: relative;
+  top: 0;
+  left: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 550px;
@@ -30,11 +32,12 @@ header {
 header .left p {
   margin: 0;
   padding: 0;
-  line-height: 32px;
+  line-height: 35px;
 }
 
 header .left p:first-of-type {
-  font-size: 4em;
+  font-size: 4rem;
+  font-weight: bold;
   line-height: normal;
 }
 
@@ -60,9 +63,9 @@ header .right {
 header .right .stats div {
   display: inline-block;
   padding: 3px 30px;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: #b2a46b;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   color: antiquewhite;
 }
 
@@ -71,19 +74,44 @@ header .right .stats div p {
   padding: 0;
   text-align: center;
   color: white;
-  font-size: 1.2em;
+  font-size: 1.2rem;
+}
+
+header .right .stats #score {
+  position: relative;
+}
+
+header .right .stats #score .score_add {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000000;
+  position: absolute;
+  visibility: hidden;
+  bottom: -10px;
+  -webkit-transition: bottom 1s ease-out, color 1s ease-out;
+  transition: bottom 1s ease-out, color 1s ease-out;
+}
+
+header .right .stats #score .score_add.show {
+  visibility: visible;
+  bottom: 30px;
+  color: #7c7c7c6d;
 }
 
 header .right #newGame {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
   background-color: #795f3d;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 12px 36px;
   cursor: pointer;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  padding: 9px 30px;
 }
 
 header .right #newGame:hover {
@@ -115,9 +143,12 @@ header .right #newGame p {
 }
 
 #game #grid {
+  position: relative;
   background-color: #a39586;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 0 12px;
+  /*Needed -> space between gridRows*/
+  font-size: 0px;
 }
 
 #game #grid .gridRow {
@@ -131,24 +162,90 @@ header .right #newGame p {
 #game #grid .gridRow .gridCell {
   width: 100px;
   height: 100px;
-  background-color: #b8ac9e;
   border-radius: 3px;
   margin: 12px 0;
   text-align: center;
   vertical-align: middle;
   line-height: 100px;
-  font-size: 3em;
+  font-size: 3rem;
+  background-color: #b8ac9e;
+}
+
+#game #grid .gridRow .gridCell .content {
+  z-index: 2000;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #b8ac9e;
+}
+
+#game #grid #endPrompt {
+  position: absolute;
+  visibility: hidden;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  border-radius: inherit;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.568);
+}
+
+#game #grid #endPrompt p {
+  position: absolute;
+  top: calc(50% - 3rem - 25px);
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  margin: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 3rem;
+  color: #646464;
+  font-weight: bold;
+}
+
+#game #grid #endPrompt button {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  background-color: #795f3d;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% + 25px);
+  padding: 9px 20px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+#game #grid #endPrompt button:hover {
+  background-color: #8f6f46;
+}
+
+#game #grid #endPrompt button:active {
+  background-color: #a88455;
+}
+
+#game #grid #endPrompt.show {
+  visibility: visible;
+  -webkit-animation: newTiles 0.25 ease-in;
+          animation: newTiles 0.25 ease-in;
 }
 
 footer p {
   padding: 12px 6px;
   margin: 5px 0 0 -12px;
-  line-height: 32px;
-  border-radius: 5px;
-}
-
-footer p:not(:last-of-type) {
-  border-bottom: 1px solid #9f9f9f;
+  line-height: 35px;
+  border-radius: 4px;
 }
 
 footer p a {
@@ -170,6 +267,106 @@ footer #howToPlay.animate {
   color: inherit;
 }
 
+#game #grid .gridRow .gridCell .content {
+  color: white;
+  font-size: 2.8rem;
+  font-weight: bold;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#game #grid .gridRow .gridCell .content.animate_new {
+  -webkit-animation: newTile 0.25s ease-in;
+          animation: newTile 0.25s ease-in;
+}
+
+#game #grid .gridRow .gridCell .content.animation_merge {
+  -webkit-animation: merge 0.25s ease-in;
+          animation: merge 0.25s ease-in;
+}
+
+#game #grid .gridRow .gridCell.animate .content {
+  z-index: 3000;
+  bottom: -300px;
+  position: relative;
+  -webkit-transition: top 0.12s ease, left 0.12s ease;
+  transition: top 0.12s ease, left 0.12s ease;
+}
+
+#game #grid .gridRow .gridCell.hide .content {
+  font-size: 3rem;
+  color: #0000;
+}
+
+#game #grid .gridRow .gridCell.cellVal_2 .content {
+  font-size: 3rem;
+  background-color: #B7B79E;
+  color: #373737;
+}
+
+#game #grid .gridRow .gridCell.cellVal_4 .content {
+  font-size: 3rem;
+  color: #1b1b1b;
+  background-color: #608567;
+}
+
+#game #grid .gridRow .gridCell.cellVal_8 .content {
+  font-size: 3rem;
+  color: black;
+  background-color: #38B000;
+}
+
+#game #grid .gridRow .gridCell.cellVal_16 .content {
+  font-size: 3rem;
+  background-color: #628219;
+}
+
+#game #grid .gridRow .gridCell.cellVal_32 .content {
+  font-size: 3rem;
+  background-color: #008000;
+}
+
+#game #grid .gridRow .gridCell.cellVal_64 .content {
+  font-size: 3rem;
+  background-color: #077b83;
+}
+
+#game #grid .gridRow .gridCell.cellVal_128 .content {
+  background-color: #3b3969;
+}
+
+#game #grid .gridRow .gridCell.cellVal_256 .content {
+  background-color: #2a3e5d;
+}
+
+#game #grid .gridRow .gridCell.cellVal_512 .content {
+  background-color: #3f295d;
+}
+
+#game #grid .gridRow .gridCell.cellVal_1024 .content {
+  background-color: #671d67;
+}
+
+#game #grid .gridRow .gridCell.cellVal_2048 .content {
+  background-color: #a20808;
+  -webkit-box-shadow: #ff5e00 0px 0px 34px -8px;
+          box-shadow: #ff5e00 0px 0px 34px -8px;
+}
+
+#game #grid .gridRow .gridCell.cellVal_4096 .content {
+  background-color: #5a0101;
+}
+
+#game #grid .gridRow .gridCell.cellVal_8192 .content {
+  background-color: #100510;
+}
+
+hr {
+  border-color: rgba(135, 135, 135, 0.55);
+  border-width: 1px;
+}
+
 @-webkit-keyframes showTuto {
   0% {
     background-color: #aec932;
@@ -185,6 +382,58 @@ footer #howToPlay.animate {
   }
   100% {
     background-color: inherit;
+  }
+}
+
+@-webkit-keyframes newTile {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes newTile {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes merge {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes merge {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 /*# sourceMappingURL=style.css.map */

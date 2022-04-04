@@ -1,4 +1,4 @@
-window.addEventListener("keydown", proccessKeyPress);
+window.addEventListener("keydown", playedTurn);
 
 window.onload = (() => {
     loadGame();

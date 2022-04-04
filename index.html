@@ -21,44 +21,82 @@
             <div id="score">
                 score
                 <p class="value">0</p>
+                <p class="score_add">+0</p>
             </div>
             <div id="best">
                 best
                 <p class="value">0</p>
             </div>
         </div>
-        <div id="newGame">
+        <button id="newGame">
             <p>New Game</p>
-        </div>
+        </button>
     </div>
 </header>
 
 <body>
     <div id="game">
         <div id="grid">
-            <div class="gridRow">
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
+            <div id="endPrompt">
+                <p>Game over!</p>
+                <button>Try again</button>
             </div>
             <div class="gridRow">
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
             </div>
             <div class="gridRow">
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
             </div>
             <div class="gridRow">
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
-                <div class="gridCell"></div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+            </div>
+            <div class="gridRow">
+                <div class="gridCell">
+                    <p class="content"></p>
+                    <div class="background"></div>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
+                <div class="gridCell">
+                    <p class="content"></p>
+                </div>
             </div>
         </div>
     </div>
@@ -69,11 +107,14 @@
         <strong>merge into one</strong> when they touch. Add them up to reach 2048
         <br><a href="#game">Start playing &#8594</a>
     </p>
-    <p>You are playing a copy of the original version of 2048.
+    <hr>
+    <p>You are playing a copy of the original 2048 from <a href="http://gabrielecirulli.com/">Gabriele
+            Cirulli.</a>
         <br><a href="https://play2048.co/">Play original &#8594</a>
     </p>
+    <hr>
     <p>
-        Redone by <a href="github.com/pajavilc">Pajavilc</a>
+        Redone by <a href="https://github.com/pajavilc">Pajavilc</a>
     </p>
 </footer>
 
